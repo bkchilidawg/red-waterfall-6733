@@ -1,0 +1,28 @@
+<h2>Total People in <%= @nation %> Nation: <%= @total_people %></h2>
+
+<% if @members.present? %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Photo</th>
+        <th>Allies</th>
+        <th>Enemies</th>
+        <th>Affiliations</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @members.each do |member| %>
+        <tr class="member">
+          <td class="name"><%= member['name'] %></td>
+          <td class="photo"><%= image_tag(member['photoUrl'], class: "thumbnail") if member['photoUrl'].present? %></td>
+          <td class="allies">Allies: <%= member['allies'].present? ? member['allies'].join(', ') : 'None' %></td>
+          <td class="enemies">Enemies: <%= member['enemies'].present? ? member['enemies'].join(', ') : 'None' %></td>
+          <td class="affiliations">Affiliations: <%= member['affiliation'] || 'None' %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>No members found for the <%= @nation %> Nation.</p>
+<% end %>
